@@ -35,7 +35,7 @@ jobs:
       run: mvn exec:java -Dexec.mainClass="com.mycompany.scripts.MySeleniumScript"
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: selenium-output
         path: output.xlsx
