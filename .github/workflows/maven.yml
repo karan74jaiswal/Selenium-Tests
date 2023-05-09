@@ -27,5 +27,15 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Run Selenium script
+      run: mvn exec:java -Dexec.mainClass="com.mycompany.scripts.MySeleniumScript"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: selenium-output
+        path: output.xlsx
