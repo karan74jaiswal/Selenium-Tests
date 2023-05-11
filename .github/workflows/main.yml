@@ -1,0 +1,22 @@
+name: Kics IAC scan
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Making IACscan Directory
+        run: mkdir IACScan-Result
+      - name: Install Kics
+        run: curl -sSfL https://raw.githubusercontent.com/Checkmarx/kics/master/install.sh | bash
+      - name: Run Kics scan
+        run: kics scan -p . -o ./IACScan-Result
+      - name: Change permissions of results directory
+        run: chmod -R 755 IACScan-Result
+      - name: Display Kics results
+        run: cat IACScan-Result/results.json
